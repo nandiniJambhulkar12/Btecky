@@ -1,0 +1,28 @@
+import math
+import random
+
+class TicTacToe:
+    def __init__(self):
+        self.board = [' ' for _ in range(9)]
+
+    def print_board(self):
+        for i in range(0, 9, 3):
+            print('|' + '|'.join(self.board[i:i + 3]) + '|')
+    
+    def available_moves(self):
+        return [i for i, spot in enumerate(self.board) if spot == ' ']
+
+    def make_move(self, position, letter):
+        self.board[position] = letter
+
+    def is_winner(self, board, letter):
+        # Check rows
+        for i in range(0, 9, 3):
+            if all(board[i+j] == letter for j in range(3)):
+                return True
+        # Check columns
+        for i in range(3):
+            if all(board[i+j] == letter for j in range(0, 9, 3)):
+                return True
+        # Check diagonals
+        if all(board[i] == letter for i in range(0, 9, 4)) or all(board[i] == letter for i in
